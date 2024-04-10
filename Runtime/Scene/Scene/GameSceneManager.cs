@@ -8,8 +8,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameFrameX.Asset;
+using Cysharp.Threading.Tasks;
+using GameFrameX.Asset.Runtime;
 using UnityEngine.SceneManagement;
+using YooAsset;
 
 namespace GameFrameX.Scene.Runtime
 {

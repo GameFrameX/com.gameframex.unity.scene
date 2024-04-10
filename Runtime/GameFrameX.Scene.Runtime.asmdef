@@ -1,7 +1,11 @@
 {
     "name": "GameFrameX.Scene.Runtime",
     "references": [
-        "GameFrameX.Runtime"
+        "GameFrameX.Runtime",
+        "GameFrameX.Event.Runtime",
+        "GameFrameX.Asset.Runtime",
+        "YooAsset.Runtime",
+        "UniTask.Runtime"
     ],
     "rootNamespace": "GameFrameX.Scene.Runtime",
     "includePlatforms": [],

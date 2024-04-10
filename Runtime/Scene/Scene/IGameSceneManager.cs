@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using GameFrameX.Asset;
+using GameFrameX.Asset.Runtime;
 using GameFrameX.Runtime;
 using UnityEngine.SceneManagement;
 using YooAsset;
