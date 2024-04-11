@@ -13,7 +13,7 @@ using UnityEngine;
 namespace GameFrameX.Scene.Editor
 {
     [CustomEditor(typeof(SceneComponent))]
-    internal sealed class SceneComponentInspector : GameFrameworkInspector
+    internal sealed class SceneComponentInspector : ComponentTypeComponentInspector
     {
         private SerializedProperty m_EnableLoadSceneUpdateEvent = null;
         private SerializedProperty m_EnableLoadSceneDependencyAssetEvent = null;
@@ -46,10 +46,15 @@ namespace GameFrameX.Scene.Editor
             }
         }
 
-        private void OnEnable()
+        protected override void Enable()
         {
             m_EnableLoadSceneUpdateEvent = serializedObject.FindProperty("m_EnableLoadSceneUpdateEvent");
             m_EnableLoadSceneDependencyAssetEvent = serializedObject.FindProperty("m_EnableLoadSceneDependencyAssetEvent");
+        }
+
+        protected override void RefreshTypeNames()
+        {
+            RefreshComponentTypeNames(typeof(IGameSceneManager));
         }
 
         private string GetSceneNameString(string[] sceneAssetNames)
