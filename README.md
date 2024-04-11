@@ -10,7 +10,7 @@ GameFrameX 的 Scene 场景管理组件
 
 1. 直接在 `manifest.json` 的文件中的 `dependencies` 节点下添加以下内容
    ```json
-      {"com.alianblank.gameframex.scene": "https://github.com/AlianBlank/com.alianblank.gameframex.unity.scene.git"}
+      {"com.alianblank.gameframex.unity.scene": "https://github.com/AlianBlank/com.alianblank.gameframex.unity.scene.git"}
     ```
 2. 在Unity 的`Packages Manager` 中使用`Git URL` 的方式添加库,地址为：https://github.com/AlianBlank/com.alianblank.gameframex.unity.scene.git
 
