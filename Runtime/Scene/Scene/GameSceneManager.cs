@@ -114,7 +114,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         protected override void Shutdown()
         {
-            var loadedSceneAssetNames = m_LoadedSceneAssetNames.Keys;
+            var loadedSceneAssetNames = m_LoadedSceneAssetNames.Keys.ToArray();
             foreach (var loadedSceneAssetName in loadedSceneAssetNames)
             {
                 if (SceneIsUnloading(loadedSceneAssetName))
