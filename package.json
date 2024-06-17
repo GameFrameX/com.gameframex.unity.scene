@@ -1,5 +1,5 @@
 {
-  "name": "com.alianblank.gameframex.unity.scene",
+  "name": "com.gameframex.unity.scene",
   "displayName": "Game Frame X Scene",
   "category": "Game Framework X",
   "description": "Game Frame X Scene Component",
@@ -9,8 +9,8 @@
     "Game Framework X"
   ],
   "repository": {
-    "name": "com.alianblank.gameframex.unity.scene",
-    "url": "https://github.com/AlianBlank/com.alianblank.gameframex.unity.scene.git",
+    "name": "com.gameframex.unity.scene",
+    "url": "https://github.com/AlianBlank/com.gameframex.unity.scene.git",
     "type": "git"
   },
   "author": {
