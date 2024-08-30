@@ -6,6 +6,7 @@
 //------------------------------------------------------------
 
 using GameFrameX.Event.Runtime;
+using YooAsset;
 
 namespace GameFrameX.Scene.Runtime
 {
@@ -53,18 +54,24 @@ namespace GameFrameX.Scene.Runtime
         public object UserData { get; private set; }
 
         /// <summary>
+        /// 获取加载场景状态
+        /// </summary>
+        public EOperationStatus Status { get; private set; }
+
+        /// <summary>
         /// 创建加载场景失败事件。
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="errorMessage">错误信息。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的加载场景失败事件。</returns>
-        public static LoadSceneFailureEventArgs Create(string sceneAssetName, string errorMessage, object userData)
+        public static LoadSceneFailureEventArgs Create(string sceneAssetName, EOperationStatus status, string errorMessage, object userData)
         {
             LoadSceneFailureEventArgs loadSceneFailureEventArgs = ReferencePool.Acquire<LoadSceneFailureEventArgs>();
             loadSceneFailureEventArgs.SceneAssetName = sceneAssetName;
             loadSceneFailureEventArgs.ErrorMessage = errorMessage;
             loadSceneFailureEventArgs.UserData = userData;
+            loadSceneFailureEventArgs.Status = status;
             return loadSceneFailureEventArgs;
         }
 
@@ -76,6 +83,7 @@ namespace GameFrameX.Scene.Runtime
             SceneAssetName = null;
             ErrorMessage = null;
             UserData = null;
+            Status = EOperationStatus.None;
         }
     }
 }
