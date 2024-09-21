@@ -53,7 +53,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         protected override void Awake()
         {
-            ImplementationComponentType = Type.GetType(componentType);
+            ImplementationComponentType = Utility.Assembly.GetType(componentType);
             InterfaceComponentType = typeof(IGameSceneManager);
             base.Awake();
             _gameSceneManager = GameFrameworkEntry.GetModule<IGameSceneManager>();
