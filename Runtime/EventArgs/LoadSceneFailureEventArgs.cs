@@ -6,6 +6,7 @@
 //------------------------------------------------------------
 
 using GameFrameX.Event.Runtime;
+using GameFrameX.Runtime;
 using YooAsset;
 
 namespace GameFrameX.Scene.Runtime
