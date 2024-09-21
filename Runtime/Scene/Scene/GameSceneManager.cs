@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
+using GameFrameX.Runtime;
 using UnityEngine.SceneManagement;
 using YooAsset;
 
@@ -18,6 +19,7 @@ namespace GameFrameX.Scene.Runtime
     /// <summary>
     /// 场景管理器。
     /// </summary>
+    [UnityEngine.Scripting.Preserve]
     public sealed class GameSceneManager : GameFrameworkModule, IGameSceneManager
     {
         private sealed class SceneHandleData
