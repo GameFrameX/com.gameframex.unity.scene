@@ -358,7 +358,7 @@ namespace GameFrameX.Scene.Runtime
         {
             if (m_LoadingSceneAssetNames.TryGetValue(sceneHandle.GetAssetInfo().AssetPath, out var value))
             {
-                LoadSceneUpdateCallback(sceneHandle.SceneName, sceneHandle.Progress, value.UserData);
+                LoadSceneUpdateCallback(sceneHandle.GetAssetInfo().AssetPath, sceneHandle.Progress, value.UserData);
             }
         }
 
@@ -374,11 +374,11 @@ namespace GameFrameX.Scene.Runtime
             {
                 if (sceneOperationHandle.IsSucceed())
                 {
-                    LoadSceneSuccessCallback(sceneOperationHandle.SceneName, sceneOperationHandle.Duration(), value.UserData);
+                    LoadSceneSuccessCallback(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle.Duration(), value.UserData);
                 }
                 else
                 {
-                    LoadSceneFailureCallback(sceneOperationHandle.SceneName, sceneOperationHandle.Status, sceneOperationHandle.LastError, value.UserData);
+                    LoadSceneFailureCallback(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle.Status, sceneOperationHandle.LastError, value.UserData);
                 }
             }
         }
