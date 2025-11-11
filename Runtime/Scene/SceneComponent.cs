@@ -22,7 +22,7 @@ namespace GameFrameX.Scene.Runtime
     /// 场景组件。
     /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("Game Framework/Scene")]
+    [AddComponentMenu("GameFrameX/Scene")]
     public sealed class SceneComponent : GameFrameworkComponent
     {
         private const int DefaultPriority = 0;
