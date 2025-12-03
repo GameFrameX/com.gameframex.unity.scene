@@ -32,8 +32,7 @@
 using GameFrameX.Event.Runtime;
 using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
-using GameFrameX.Asset;
+using System.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
 using GameFrameX.Runtime;
 using UnityEngine;
@@ -278,9 +277,9 @@ namespace GameFrameX.Scene.Runtime
         /// 加载场景。
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
-        public UniTask<SceneHandle> LoadScene(string sceneAssetName)
+        public async Task<SceneHandle> LoadScene(string sceneAssetName)
         {
-            return LoadScene(sceneAssetName, LoadSceneMode.Additive, null);
+            return await LoadScene(sceneAssetName, LoadSceneMode.Additive, null);
         }
 
         /// <summary>
@@ -289,7 +288,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="sceneMode">加载场景资源的优先级。</param>
         /// <param name="userData">用户自定义数据。</param>
-        public UniTask<SceneHandle> LoadScene(string sceneAssetName, LoadSceneMode sceneMode, object userData = null)
+        public async Task<SceneHandle> LoadScene(string sceneAssetName, LoadSceneMode sceneMode, object userData = null)
         {
             if (string.IsNullOrEmpty(sceneAssetName))
             {
@@ -304,7 +303,7 @@ namespace GameFrameX.Scene.Runtime
                 throw new ArgumentException(nameof(sceneAssetName));
             }
 
-            return _gameSceneManager.LoadScene(sceneAssetName, sceneMode, userData);
+            return await _gameSceneManager.LoadScene(sceneAssetName, sceneMode, userData);
         }
 
         /// <summary>
@@ -449,7 +448,7 @@ namespace GameFrameX.Scene.Runtime
         private void OnLoadGameSceneFailure(object sender, LoadSceneFailureEventArgs eventArgs)
         {
             Log.Warning("Load scene failure, scene asset name '{0}', error message '{1}'.", eventArgs.SceneAssetName,
-                eventArgs.ErrorMessage);
+                        eventArgs.ErrorMessage);
             m_EventComponent.Fire(this, eventArgs);
         }
 

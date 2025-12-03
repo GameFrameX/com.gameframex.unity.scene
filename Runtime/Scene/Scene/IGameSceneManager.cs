@@ -31,10 +31,8 @@
 
 using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
-using GameFrameX.Asset;
+using System.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
-using GameFrameX.Runtime;
 using UnityEngine.SceneManagement;
 using YooAsset;
 
@@ -144,14 +142,15 @@ namespace GameFrameX.Scene.Runtime
         /// 加载场景。
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
-        UniTask<SceneHandle> LoadScene(string sceneAssetName);
+        /// <returns>场景资源是否存在。</returns>
+        Task<SceneHandle> LoadScene(string sceneAssetName);
 
         /// <summary>
         /// 加载场景。
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
-        UniTask<SceneHandle> LoadScene(string sceneAssetName, object userData);
+        Task<SceneHandle> LoadScene(string sceneAssetName, object userData);
 
         /// <summary>
         /// 加载场景。
@@ -159,7 +158,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="sceneMode"></param>
         /// <param name="userData">用户自定义数据。</param>
-        UniTask<SceneHandle> LoadScene(string sceneAssetName, LoadSceneMode sceneMode, object userData);
+        Task<SceneHandle> LoadScene(string sceneAssetName, LoadSceneMode sceneMode, object userData);
 
         /// <summary>
         /// 卸载场景。

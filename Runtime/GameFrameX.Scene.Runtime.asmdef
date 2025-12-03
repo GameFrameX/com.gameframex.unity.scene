@@ -5,8 +5,7 @@
     "GameFrameX.Event.Runtime",
     "GameFrameX.Asset.Runtime",
     "YooAsset.Runtime",
-    "YooAsset",
-    "UniTask.Runtime"
+    "YooAsset"
   ],
   "rootNamespace": "GameFrameX.Scene.Runtime",
   "includePlatforms": [],
