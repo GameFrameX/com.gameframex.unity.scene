@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.0.0...2.1.0) (2025-12-23)
+
+
+### Features
+
+* **Scene:** 更新场景管理器 ([0037773](https://github.com/gameframex/com.gameframex.unity.scene/commit/0037773017f7f773d01296f9923e6aeaac660113))
+
 # Changelog
 
 ## [2.0.0](https://github.com/GameFrameX/com.gameframex.unity.scene/tree/2.0.0) (2025-10-25)
