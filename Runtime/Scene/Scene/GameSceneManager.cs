@@ -374,7 +374,7 @@ namespace GameFrameX.Scene.Runtime
 
             var sceneOperationHandle = await m_assetManager.LoadSceneAsync(sceneAssetName, sceneMode, true);
             m_LoadingSceneAssetNames.Add(sceneAssetName, new SceneHandleData(sceneOperationHandle, userData));
-            sceneOperationHandle.Update += OnLoadSceneUpdate;
+            // sceneOperationHandle.Update += OnLoadSceneUpdate;
             sceneOperationHandle.Completed += OnLoadSceneCompleted;
             return sceneOperationHandle;
         }
@@ -397,9 +397,9 @@ namespace GameFrameX.Scene.Runtime
 
             if (value != null)
             {
-                if (sceneOperationHandle.IsSucceed())
+                if (sceneOperationHandle.IsDone && sceneOperationHandle.Status == EOperationStatus.Succeed)
                 {
-                    LoadSceneSuccessCallback(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle.Duration(), value.UserData);
+                    LoadSceneSuccessCallback(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle.Progress, value.UserData);
                 }
                 else
                 {
