@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.1.0...2.1.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* **scene:** 修复场景加载状态判断和回调参数 ([92b519a](https://github.com/gameframex/com.gameframex.unity.scene/commit/92b519a4e195d14af184c20a30e1f739a0f4c142))
+
 # [2.1.0](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.0.0...2.1.0) (2025-12-23)
 
 
