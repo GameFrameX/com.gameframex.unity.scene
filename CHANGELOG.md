@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.1.1...2.1.2) (2026-03-16)
+
+
+### Bug Fixes
+
+* **场景管理:** 将加载成功回调参数从进度改为持续时间 ([ea75cb5](https://github.com/gameframex/com.gameframex.unity.scene/commit/ea75cb57102a7d3026303f9a1e211507a9bcf245))
+
 ## [2.1.1](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.1.0...2.1.1) (2026-03-13)
 
 
