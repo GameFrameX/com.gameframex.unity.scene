@@ -399,7 +399,7 @@ namespace GameFrameX.Scene.Runtime
             {
                 if (sceneOperationHandle.IsDone && sceneOperationHandle.Status == EOperationStatus.Succeed)
                 {
-                    LoadSceneSuccessCallback(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle.Progress, value.UserData);
+                    LoadSceneSuccessCallback(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle.Duration, value.UserData);
                 }
                 else
                 {
