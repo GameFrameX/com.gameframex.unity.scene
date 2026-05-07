@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.1.2...2.2.0) (2026-05-07)
+
+
+### Features
+
+* 移除对YooAsset命名空间的直接依赖 ([0f634ea](https://github.com/gameframex/com.gameframex.unity.scene/commit/0f634eaf717c87144f6529619eb1c8bf4818d733))
+
 ## [2.1.2](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.1.1...2.1.2) (2026-03-16)
 
 
