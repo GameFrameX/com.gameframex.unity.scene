@@ -36,7 +36,6 @@ using System.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
 using GameFrameX.Runtime;
 using UnityEngine;
-using YooAsset;
 
 namespace GameFrameX.Scene.Runtime
 {
@@ -276,7 +275,7 @@ namespace GameFrameX.Scene.Runtime
         /// 加载场景。
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
-        public async Task<SceneHandle> LoadScene(string sceneAssetName)
+        public async Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName)
         {
             return await LoadScene(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Additive, null);
         }
@@ -287,7 +286,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="sceneMode">加载场景资源的优先级。</param>
         /// <param name="userData">用户自定义数据。</param>
-        public async Task<SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode, object userData = null)
+        public async Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode, object userData = null)
         {
             if (string.IsNullOrEmpty(sceneAssetName))
             {

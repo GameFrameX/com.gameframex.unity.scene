@@ -35,7 +35,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
 using GameFrameX.Runtime;
-using YooAsset;
 
 namespace GameFrameX.Scene.Runtime
 {
@@ -47,19 +46,19 @@ namespace GameFrameX.Scene.Runtime
     {
         private sealed class SceneHandleData
         {
-            public readonly SceneHandle SceneHandle;
+            public readonly YooAsset.SceneHandle SceneHandle;
             public readonly object UserData;
 
-            public SceneHandleData(SceneHandle sceneHandle, object userData)
+            public SceneHandleData(YooAsset.SceneHandle sceneHandle, object userData)
             {
                 SceneHandle = sceneHandle;
                 UserData = userData;
             }
         }
 
-        private readonly Dictionary<string, SceneHandle> m_LoadedSceneAssetNames;
+        private readonly Dictionary<string, YooAsset.SceneHandle> m_LoadedSceneAssetNames;
         private readonly Dictionary<string, SceneHandleData> m_LoadingSceneAssetNames;
-        private readonly Dictionary<string, SceneHandle> m_UnloadingSceneAssetNames;
+        private readonly Dictionary<string, YooAsset.SceneHandle> m_UnloadingSceneAssetNames;
         private IAssetManager m_assetManager;
         private EventHandler<LoadSceneSuccessEventArgs> m_LoadSceneSuccessEventHandler;
         private EventHandler<LoadSceneFailureEventArgs> m_LoadSceneFailureEventHandler;
@@ -73,9 +72,9 @@ namespace GameFrameX.Scene.Runtime
         [UnityEngine.Scripting.Preserve]
         public GameSceneManager()
         {
-            m_LoadedSceneAssetNames = new Dictionary<string, SceneHandle>();
+            m_LoadedSceneAssetNames = new Dictionary<string, YooAsset.SceneHandle>();
             m_LoadingSceneAssetNames = new Dictionary<string, SceneHandleData>();
-            m_UnloadingSceneAssetNames = new Dictionary<string, SceneHandle>();
+            m_UnloadingSceneAssetNames = new Dictionary<string, YooAsset.SceneHandle>();
             m_assetManager = null;
             m_LoadSceneSuccessEventHandler = null;
             m_LoadSceneFailureEventHandler = null;
@@ -313,7 +312,7 @@ namespace GameFrameX.Scene.Runtime
         /// 加载场景。
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
-        public Task<SceneHandle> LoadScene(string sceneAssetName)
+        public Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName)
         {
             return LoadScene(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
@@ -323,7 +322,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="sceneMode">加载场景的方式。</param>
-        public Task<SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode)
+        public Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode)
         {
             return LoadScene(sceneAssetName, sceneMode, null);
         }
@@ -333,7 +332,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
-        public Task<SceneHandle> LoadScene(string sceneAssetName, object userData)
+        public Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName, object userData)
         {
             return LoadScene(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Single, userData);
         }
@@ -344,7 +343,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <param name="sceneMode"></param>
-        public async Task<SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode, object userData)
+        public async Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode, object userData)
         {
             if (string.IsNullOrEmpty(sceneAssetName))
             {
@@ -378,7 +377,7 @@ namespace GameFrameX.Scene.Runtime
             return sceneOperationHandle;
         }
 
-        private void OnLoadSceneUpdate(SceneHandle sceneHandle)
+        private void OnLoadSceneUpdate(YooAsset.SceneHandle sceneHandle)
         {
             if (m_LoadingSceneAssetNames.TryGetValue(sceneHandle.GetAssetInfo().AssetPath, out var value))
             {
@@ -386,7 +385,7 @@ namespace GameFrameX.Scene.Runtime
             }
         }
 
-        private void OnLoadSceneCompleted(SceneHandle sceneOperationHandle)
+        private void OnLoadSceneCompleted(YooAsset.SceneHandle sceneOperationHandle)
         {
             m_LoadedSceneAssetNames.Add(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle);
             if (m_LoadingSceneAssetNames.TryGetValue(sceneOperationHandle.GetAssetInfo().AssetPath, out var value))
@@ -396,7 +395,7 @@ namespace GameFrameX.Scene.Runtime
 
             if (value != null)
             {
-                if (sceneOperationHandle.IsDone && sceneOperationHandle.Status == EOperationStatus.Succeed)
+                if (sceneOperationHandle.IsDone && sceneOperationHandle.Status == YooAsset.EOperationStatus.Succeed)
                 {
                     LoadSceneSuccessCallback(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle.Duration, value.UserData);
                 }
@@ -454,7 +453,7 @@ namespace GameFrameX.Scene.Runtime
                 m_LoadedSceneAssetNames.Remove(sceneAssetName);
                 m_UnloadingSceneAssetNames.Add(sceneAssetName, sceneOperationHandle);
 
-                void OnUnloadSceneOperationHandleOnCompleted(AsyncOperationBase asyncOperationBase)
+                void OnUnloadSceneOperationHandleOnCompleted(YooAsset.AsyncOperationBase asyncOperationBase)
                 {
                     if (asyncOperationBase.Error.IsNullOrEmpty())
                     {
@@ -482,7 +481,7 @@ namespace GameFrameX.Scene.Runtime
             }
         }
 
-        private void LoadSceneFailureCallback(string sceneAssetName, EOperationStatus status, string errorMessage, object userData)
+        private void LoadSceneFailureCallback(string sceneAssetName, YooAsset.EOperationStatus status, string errorMessage, object userData)
         {
             m_LoadingSceneAssetNames.Remove(sceneAssetName);
             string appendErrorMessage = Utility.Text.Format("Load scene failure, scene asset name '{0}', status '{1}', error message '{2}'.", sceneAssetName, status, errorMessage);
