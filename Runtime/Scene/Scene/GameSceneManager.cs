@@ -35,7 +35,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
 using GameFrameX.Runtime;
-using UnityEngine.SceneManagement;
 using YooAsset;
 
 namespace GameFrameX.Scene.Runtime
@@ -307,7 +306,7 @@ namespace GameFrameX.Scene.Runtime
         /// <returns>场景资源是否存在。</returns>
         public bool HasScene(string sceneAssetName)
         {
-            return m_assetManager.LoadSceneAsync(sceneAssetName, LoadSceneMode.Single).Status != System.Threading.Tasks.TaskStatus.Faulted;
+            return m_assetManager.LoadSceneAsync(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Single).Status != System.Threading.Tasks.TaskStatus.Faulted;
         }
 
         /// <summary>
@@ -316,7 +315,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         public Task<SceneHandle> LoadScene(string sceneAssetName)
         {
-            return LoadScene(sceneAssetName, LoadSceneMode.Single);
+            return LoadScene(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
 
         /// <summary>
@@ -324,7 +323,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="sceneMode">加载场景的方式。</param>
-        public Task<SceneHandle> LoadScene(string sceneAssetName, LoadSceneMode sceneMode)
+        public Task<SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode)
         {
             return LoadScene(sceneAssetName, sceneMode, null);
         }
@@ -336,7 +335,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="userData">用户自定义数据。</param>
         public Task<SceneHandle> LoadScene(string sceneAssetName, object userData)
         {
-            return LoadScene(sceneAssetName, LoadSceneMode.Single, userData);
+            return LoadScene(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Single, userData);
         }
 
         /// <summary>
@@ -345,7 +344,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <param name="sceneMode"></param>
-        public async Task<SceneHandle> LoadScene(string sceneAssetName, LoadSceneMode sceneMode, object userData)
+        public async Task<SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode, object userData)
         {
             if (string.IsNullOrEmpty(sceneAssetName))
             {

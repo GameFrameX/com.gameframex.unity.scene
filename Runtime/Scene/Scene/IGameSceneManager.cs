@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
-using UnityEngine.SceneManagement;
 using YooAsset;
 
 namespace GameFrameX.Scene.Runtime
@@ -158,7 +157,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="sceneMode"></param>
         /// <param name="userData">用户自定义数据。</param>
-        Task<SceneHandle> LoadScene(string sceneAssetName, LoadSceneMode sceneMode, object userData);
+        Task<SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode, object userData);
 
         /// <summary>
         /// 卸载场景。
