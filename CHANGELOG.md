@@ -1,3 +1,11 @@
+## [2.2.1](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.0...2.2.1) (2026-05-28)
+
+
+### Bug Fixes
+
+* **ci:** 统一 .github 工作流配置 ([5b8f25b](https://github.com/gameframex/com.gameframex.unity.scene/commit/5b8f25b9ab93a95c81c3240294ca17b4c277330a))
+* **deps:** 补充 package.json 中缺失的包依赖 ([9e1cc9f](https://github.com/gameframex/com.gameframex.unity.scene/commit/9e1cc9fefe34a6777621f279e754e41ced4cb1a2))
+
 # [2.2.0](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.1.2...2.2.0) (2026-05-07)
 
 
