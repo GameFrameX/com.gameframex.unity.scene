@@ -1,12 +1,13 @@
 {
   "name": "com.gameframex.unity.scene",
   "displayName": "Game Frame X Scene",
-  "category": "Game Framework X",
+  "category": "GameFrameX",
   "description": "Game Frame X Scene Component",
   "version": "2.2.0",
   "unity": "2019.4",
   "keywords": [
-    "Game Framework X"
+    "GameFrameX",
+    "Scene"
   ],
   "repository": {
     "name": "com.gameframex.unity.scene",
