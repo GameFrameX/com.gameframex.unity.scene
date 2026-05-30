@@ -77,14 +77,14 @@ Add to the `dependencies` section of your project's `Packages/manifest.json`:
 
 ```json
 {
-  "com.gameframex.unity.scene": "https://github.com/AlianBlank/com.gameframex.unity.scene.git"
+  "com.gameframex.unity.scene": "https://github.com/GameFrameX/com.gameframex.unity.scene.git"
 }
 ```
 
 Or via Unity Package Manager (`Window > Package Manager > + > Add package from git URL`):
 
 ```
-https://github.com/AlianBlank/com.gameframex.unity.scene.git
+https://github.com/GameFrameX/com.gameframex.unity.scene.git
 ```
 
 **3. Manual**

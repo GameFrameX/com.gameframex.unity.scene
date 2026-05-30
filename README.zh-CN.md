@@ -77,14 +77,14 @@ GameFrameX Scene 是基于 [YooAsset](https://github.com/tuyoogame/YooAsset) 的
 
 ```json
 {
-  "com.gameframex.unity.scene": "https://github.com/AlianBlank/com.gameframex.unity.scene.git"
+  "com.gameframex.unity.scene": "https://github.com/GameFrameX/com.gameframex.unity.scene.git"
 }
 ```
 
 或通过 Unity Package Manager（`Window > Package Manager > + > Add package from git URL`）：
 
 ```
-https://github.com/AlianBlank/com.gameframex.unity.scene.git
+https://github.com/GameFrameX/com.gameframex.unity.scene.git
 ```
 
 **3. 手动安装**

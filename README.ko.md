@@ -77,14 +77,14 @@ Unity 프로젝트의 `Packages/manifest.json`을 편집하여 `scopedRegistries
 
 ```json
 {
-  "com.gameframex.unity.scene": "https://github.com/AlianBlank/com.gameframex.unity.scene.git"
+  "com.gameframex.unity.scene": "https://github.com/GameFrameX/com.gameframex.unity.scene.git"
 }
 ```
 
 또는 Unity Package Manager(`Window > Package Manager > + > Add package from git URL`)를 통해:
 
 ```
-https://github.com/AlianBlank/com.gameframex.unity.scene.git
+https://github.com/GameFrameX/com.gameframex.unity.scene.git
 ```
 
 **3. 수동 설치**

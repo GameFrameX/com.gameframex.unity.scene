@@ -77,14 +77,14 @@ Unity プロジェクトの `Packages/manifest.json` を編集し、`scopedRegis
 
 ```json
 {
-  "com.gameframex.unity.scene": "https://github.com/AlianBlank/com.gameframex.unity.scene.git"
+  "com.gameframex.unity.scene": "https://github.com/GameFrameX/com.gameframex.unity.scene.git"
 }
 ```
 
 または Unity Package Manager（`Window > Package Manager > + > Add package from git URL`）経由：
 
 ```
-https://github.com/AlianBlank/com.gameframex.unity.scene.git
+https://github.com/GameFrameX/com.gameframex.unity.scene.git
 ```
 
 **3. 手動インストール**
