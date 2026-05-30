@@ -31,6 +31,7 @@
 
 using GameFrameX.Event.Runtime;
 using GameFrameX.Runtime;
+using UnityEngine.Scripting;
 
 namespace GameFrameX.Scene.Runtime
 {
@@ -47,6 +48,7 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 初始化加载场景失败事件的新实例。
         /// </summary>
+        [Preserve]
         public LoadSceneFailureEventArgs()
         {
             SceneAssetName = null;
@@ -65,21 +67,25 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 获取场景资源名称。
         /// </summary>
+        [Preserve]
         public string SceneAssetName { get; private set; }
 
         /// <summary>
         /// 获取错误信息。
         /// </summary>
+        [Preserve]
         public string ErrorMessage { get; private set; }
 
         /// <summary>
         /// 获取用户自定义数据。
         /// </summary>
+        [Preserve]
         public object UserData { get; private set; }
 
         /// <summary>
         /// 获取加载场景状态
         /// </summary>
+        [Preserve]
         public YooAsset.EOperationStatus Status { get; private set; }
 
         /// <summary>
@@ -89,6 +95,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="errorMessage">错误信息。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的加载场景失败事件。</returns>
+        [Preserve]
         public static LoadSceneFailureEventArgs Create(string sceneAssetName, YooAsset.EOperationStatus status, string errorMessage, object userData)
         {
             LoadSceneFailureEventArgs loadSceneFailureEventArgs = ReferencePool.Acquire<LoadSceneFailureEventArgs>();

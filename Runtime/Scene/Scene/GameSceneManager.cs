@@ -167,6 +167,7 @@ namespace GameFrameX.Scene.Runtime
         /// 设置资源管理器。
         /// </summary>
         /// <param name="assetManager"></param>
+        [UnityEngine.Scripting.Preserve]
         public void SetResourceManager(IAssetManager assetManager)
         {
             if (assetManager == null)
@@ -198,6 +199,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <returns>场景是否已加载。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool SceneIsLoaded(string sceneAssetName)
         {
             CheckSceneAssetName(sceneAssetName);
@@ -208,6 +210,7 @@ namespace GameFrameX.Scene.Runtime
         /// 获取已加载场景的资源名称。
         /// </summary>
         /// <returns>已加载场景的资源名称。</returns>
+        [UnityEngine.Scripting.Preserve]
         public string[] GetLoadedSceneAssetNames()
         {
             return m_LoadedSceneAssetNames.Keys.ToArray();
@@ -217,6 +220,7 @@ namespace GameFrameX.Scene.Runtime
         /// 获取已加载场景的资源名称。
         /// </summary>
         /// <param name="results">已加载场景的资源名称。</param>
+        [UnityEngine.Scripting.Preserve]
         public void GetLoadedSceneAssetNames(List<string> results)
         {
             if (results == null)
@@ -233,6 +237,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <returns>场景是否正在加载。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool SceneIsLoading(string sceneAssetName)
         {
             CheckSceneAssetName(sceneAssetName);
@@ -243,6 +248,7 @@ namespace GameFrameX.Scene.Runtime
         /// 获取正在加载场景的资源名称。
         /// </summary>
         /// <returns>正在加载场景的资源名称。</returns>
+        [UnityEngine.Scripting.Preserve]
         public string[] GetLoadingSceneAssetNames()
         {
             return m_LoadingSceneAssetNames.Keys.ToArray();
@@ -252,6 +258,7 @@ namespace GameFrameX.Scene.Runtime
         /// 获取正在加载场景的资源名称。
         /// </summary>
         /// <param name="results">正在加载场景的资源名称。</param>
+        [UnityEngine.Scripting.Preserve]
         public void GetLoadingSceneAssetNames(List<string> results)
         {
             if (results == null)
@@ -268,6 +275,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <returns>场景是否正在卸载。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool SceneIsUnloading(string sceneAssetName)
         {
             CheckSceneAssetName(sceneAssetName);
@@ -278,6 +286,7 @@ namespace GameFrameX.Scene.Runtime
         /// 获取正在卸载场景的资源名称。
         /// </summary>
         /// <returns>正在卸载场景的资源名称。</returns>
+        [UnityEngine.Scripting.Preserve]
         public string[] GetUnloadingSceneAssetNames()
         {
             return m_UnloadingSceneAssetNames.Keys.ToArray();
@@ -287,6 +296,7 @@ namespace GameFrameX.Scene.Runtime
         /// 获取正在卸载场景的资源名称。
         /// </summary>
         /// <param name="results">正在卸载场景的资源名称。</param>
+        [UnityEngine.Scripting.Preserve]
         public void GetUnloadingSceneAssetNames(List<string> results)
         {
             if (results == null)
@@ -303,6 +313,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">要检查场景资源的名称。</param>
         /// <returns>场景资源是否存在。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool HasScene(string sceneAssetName)
         {
             if (string.IsNullOrEmpty(sceneAssetName))
@@ -322,6 +333,7 @@ namespace GameFrameX.Scene.Runtime
         /// 加载场景。
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
+        [UnityEngine.Scripting.Preserve]
         public Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName)
         {
             return LoadScene(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Single);
@@ -332,6 +344,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="sceneMode">加载场景的方式。</param>
+        [UnityEngine.Scripting.Preserve]
         public Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode)
         {
             return LoadScene(sceneAssetName, sceneMode, null);
@@ -342,6 +355,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
+        [UnityEngine.Scripting.Preserve]
         public Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName, object userData)
         {
             return LoadScene(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Single, userData);
@@ -353,6 +367,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <param name="sceneMode"></param>
+        [UnityEngine.Scripting.Preserve]
         public async Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode, object userData)
         {
             CheckSceneAssetName(sceneAssetName);
@@ -419,6 +434,7 @@ namespace GameFrameX.Scene.Runtime
         /// 卸载场景。
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
+        [UnityEngine.Scripting.Preserve]
         public void UnloadScene(string sceneAssetName)
         {
             UnloadScene(sceneAssetName, null);
@@ -429,6 +445,7 @@ namespace GameFrameX.Scene.Runtime
         /// </summary>
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
+        [UnityEngine.Scripting.Preserve]
         public void UnloadScene(string sceneAssetName, object userData)
         {
             CheckSceneAssetName(sceneAssetName);

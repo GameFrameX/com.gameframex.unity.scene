@@ -31,6 +31,7 @@
 
 using GameFrameX.Event.Runtime;
 using GameFrameX.Runtime;
+using UnityEngine.Scripting;
 
 namespace GameFrameX.Scene.Runtime
 {
@@ -47,6 +48,7 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 初始化卸载场景成功事件的新实例。
         /// </summary>
+        [Preserve]
         public UnloadSceneSuccessEventArgs()
         {
             SceneAssetName = null;
@@ -64,11 +66,13 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 获取场景资源名称。
         /// </summary>
+        [Preserve]
         public string SceneAssetName { get; private set; }
 
         /// <summary>
         /// 获取用户自定义数据。
         /// </summary>
+        [Preserve]
         public object UserData { get; private set; }
 
         /// <summary>
@@ -77,6 +81,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的卸载场景成功事件。</returns>
+        [Preserve]
         public static UnloadSceneSuccessEventArgs Create(string sceneAssetName, object userData)
         {
             UnloadSceneSuccessEventArgs unloadSceneSuccessEventArgs = ReferencePool.Acquire<UnloadSceneSuccessEventArgs>();

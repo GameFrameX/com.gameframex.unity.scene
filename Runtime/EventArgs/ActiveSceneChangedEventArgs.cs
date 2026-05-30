@@ -31,6 +31,7 @@
 
 using GameFrameX.Event.Runtime;
 using GameFrameX.Runtime;
+using UnityEngine.Scripting;
 
 namespace GameFrameX.Scene.Runtime
 {
@@ -47,6 +48,7 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 初始化激活场景被改变事件的新实例。
         /// </summary>
+        [Preserve]
         public ActiveSceneChangedEventArgs()
         {
             LastActiveScene = default(UnityEngine.SceneManagement.Scene);
@@ -64,11 +66,13 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 获取上一个被激活的场景。
         /// </summary>
+        [Preserve]
         public UnityEngine.SceneManagement.Scene LastActiveScene { get; private set; }
 
         /// <summary>
         /// 获取被激活的场景。
         /// </summary>
+        [Preserve]
         public UnityEngine.SceneManagement.Scene ActiveScene { get; private set; }
 
         /// <summary>
@@ -77,6 +81,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="lastActiveScene">上一个被激活的场景。</param>
         /// <param name="activeScene">被激活的场景。</param>
         /// <returns>创建的激活场景被改变事件。</returns>
+        [Preserve]
         public static ActiveSceneChangedEventArgs Create(UnityEngine.SceneManagement.Scene lastActiveScene, UnityEngine.SceneManagement.Scene activeScene)
         {
             ActiveSceneChangedEventArgs activeSceneChangedEventArgs = ReferencePool.Acquire<ActiveSceneChangedEventArgs>();
