@@ -40,7 +40,7 @@ namespace GameFrameX.Scene.Runtime
     public sealed class UnloadSceneFailureEventArgs : GameEventArgs
     {
         /// <summary>
-        /// 加载场景失败事件编号。
+        /// 卸载场景失败事件编号。
         /// </summary>
         public static readonly string EventId = typeof(UnloadSceneFailureEventArgs).FullName;
 
@@ -54,7 +54,7 @@ namespace GameFrameX.Scene.Runtime
         }
 
         /// <summary>
-        /// 获取加载场景失败事件编号。
+        /// 获取卸载场景失败事件编号。
         /// </summary>
         public override string Id
         {
