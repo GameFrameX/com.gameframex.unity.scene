@@ -5,15 +5,6 @@ namespace GameFrameX.Scene.Tests
 {
     internal class UnitTests
     {
-        private DateTime dateTime, dateTime1;
-
-        [SetUp]
-        public void Setup()
-        {
-            dateTime = DateTime.Now;
-            dateTime1 = DateTime.Now.AddHours(1);
-        }
-
         // Here is an example of a unit test for the IsUnixSameDay method
         [Test]
         public void TestIsUnixSameDay()
@@ -29,6 +20,9 @@ namespace GameFrameX.Scene.Tests
         [Test]
         public void Test1()
         {
+            var dateTime = new DateTime(2026, 5, 30, 10, 0, 0);
+            var dateTime1 = dateTime.AddHours(1);
+
             Assert.That(dateTime1.Year, Is.EqualTo(dateTime.Year));
             Assert.That(dateTime1.Month, Is.EqualTo(dateTime.Month));
             Assert.That(dateTime1.Day, Is.EqualTo(dateTime.Day));
