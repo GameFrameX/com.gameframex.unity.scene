@@ -277,7 +277,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneAssetName">场景资源名称。</param>
         public async Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName)
         {
-            return await LoadScene(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Additive, null);
+            return await LoadScene(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Single, null);
         }
 
         /// <summary>
@@ -313,19 +313,16 @@ namespace GameFrameX.Scene.Runtime
         {
             if (string.IsNullOrEmpty(sceneAssetName))
             {
-                Log.Error("Scene asset name is invalid.");
-                return;
+                throw new ArgumentNullException(nameof(sceneAssetName));
             }
 
             if (!sceneAssetName.StartsWith("Assets/", StringComparison.Ordinal) ||
                 !sceneAssetName.EndsWith(".unity", StringComparison.Ordinal))
             {
-                Log.Error("Scene asset name '{0}' is invalid.", sceneAssetName);
-                return;
+                throw new ArgumentException(string.Format("Scene asset name '{0}' is invalid.", sceneAssetName), nameof(sceneAssetName));
             }
 
             _gameSceneManager.UnloadScene(sceneAssetName, userData);
-            m_SceneOrder.Remove(sceneAssetName);
         }
 
         /// <summary>
