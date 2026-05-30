@@ -161,10 +161,6 @@ namespace GameFrameX.Scene.Runtime
 
                 UnloadScene(loadedSceneAssetName);
             }
-
-            m_LoadedSceneAssetNames.Clear();
-            m_LoadingSceneAssetNames.Clear();
-            m_UnloadingSceneAssetNames.Clear();
         }
 
         /// <summary>
@@ -181,6 +177,22 @@ namespace GameFrameX.Scene.Runtime
             m_assetManager = assetManager;
         }
 
+        private void CheckSceneAssetName(string sceneAssetName)
+        {
+            if (string.IsNullOrEmpty(sceneAssetName))
+            {
+                throw new GameFrameworkException("Scene asset name is invalid.");
+            }
+        }
+
+        private void CheckAssetManager()
+        {
+            if (m_assetManager == null)
+            {
+                throw new GameFrameworkException("You must set resource manager first.");
+            }
+        }
+
         /// <summary>
         /// 获取场景是否已加载。
         /// </summary>
@@ -188,11 +200,7 @@ namespace GameFrameX.Scene.Runtime
         /// <returns>场景是否已加载。</returns>
         public bool SceneIsLoaded(string sceneAssetName)
         {
-            if (string.IsNullOrEmpty(sceneAssetName))
-            {
-                throw new GameFrameworkException("Scene asset name is invalid.");
-            }
-
+            CheckSceneAssetName(sceneAssetName);
             return m_LoadedSceneAssetNames.ContainsKey(sceneAssetName);
         }
 
@@ -227,11 +235,7 @@ namespace GameFrameX.Scene.Runtime
         /// <returns>场景是否正在加载。</returns>
         public bool SceneIsLoading(string sceneAssetName)
         {
-            if (string.IsNullOrEmpty(sceneAssetName))
-            {
-                throw new GameFrameworkException("Scene asset name is invalid.");
-            }
-
+            CheckSceneAssetName(sceneAssetName);
             return m_LoadingSceneAssetNames.ContainsKey(sceneAssetName);
         }
 
@@ -266,11 +270,7 @@ namespace GameFrameX.Scene.Runtime
         /// <returns>场景是否正在卸载。</returns>
         public bool SceneIsUnloading(string sceneAssetName)
         {
-            if (string.IsNullOrEmpty(sceneAssetName))
-            {
-                throw new GameFrameworkException("Scene asset name is invalid.");
-            }
-
+            CheckSceneAssetName(sceneAssetName);
             return m_UnloadingSceneAssetNames.ContainsKey(sceneAssetName);
         }
 
@@ -305,7 +305,17 @@ namespace GameFrameX.Scene.Runtime
         /// <returns>场景资源是否存在。</returns>
         public bool HasScene(string sceneAssetName)
         {
-            return m_assetManager.LoadSceneAsync(sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode.Single).Status != System.Threading.Tasks.TaskStatus.Faulted;
+            if (string.IsNullOrEmpty(sceneAssetName))
+            {
+                return false;
+            }
+
+            if (m_assetManager == null)
+            {
+                return false;
+            }
+
+            return m_assetManager.HasAssetPath(sceneAssetName);
         }
 
         /// <summary>
@@ -345,15 +355,8 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="sceneMode"></param>
         public async Task<YooAsset.SceneHandle> LoadScene(string sceneAssetName, UnityEngine.SceneManagement.LoadSceneMode sceneMode, object userData)
         {
-            if (string.IsNullOrEmpty(sceneAssetName))
-            {
-                throw new GameFrameworkException("Scene asset name is invalid.");
-            }
-
-            if (m_assetManager == null)
-            {
-                throw new GameFrameworkException("You must set resource manager first.");
-            }
+            CheckSceneAssetName(sceneAssetName);
+            CheckAssetManager();
 
             if (SceneIsUnloading(sceneAssetName))
             {
@@ -387,21 +390,27 @@ namespace GameFrameX.Scene.Runtime
 
         private void OnLoadSceneCompleted(YooAsset.SceneHandle sceneOperationHandle)
         {
-            m_LoadedSceneAssetNames.Add(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle);
-            if (m_LoadingSceneAssetNames.TryGetValue(sceneOperationHandle.GetAssetInfo().AssetPath, out var value))
+            string assetPath = sceneOperationHandle.GetAssetInfo().AssetPath;
+
+            if (!m_LoadedSceneAssetNames.ContainsKey(assetPath))
             {
-                m_LoadingSceneAssetNames.Remove(sceneOperationHandle.GetAssetInfo().AssetPath);
+                m_LoadedSceneAssetNames.Add(assetPath, sceneOperationHandle);
+            }
+
+            if (m_LoadingSceneAssetNames.TryGetValue(assetPath, out var value))
+            {
+                m_LoadingSceneAssetNames.Remove(assetPath);
             }
 
             if (value != null)
             {
                 if (sceneOperationHandle.IsDone && sceneOperationHandle.Status == YooAsset.EOperationStatus.Succeed)
                 {
-                    LoadSceneSuccessCallback(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle.Duration, value.UserData);
+                    LoadSceneSuccessCallback(assetPath, sceneOperationHandle.Duration, value.UserData);
                 }
                 else
                 {
-                    LoadSceneFailureCallback(sceneOperationHandle.GetAssetInfo().AssetPath, sceneOperationHandle.Status, sceneOperationHandle.LastError, value.UserData);
+                    LoadSceneFailureCallback(assetPath, sceneOperationHandle.Status, sceneOperationHandle.LastError, value.UserData);
                 }
             }
         }
@@ -422,15 +431,8 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="userData">用户自定义数据。</param>
         public void UnloadScene(string sceneAssetName, object userData)
         {
-            if (string.IsNullOrEmpty(sceneAssetName))
-            {
-                throw new GameFrameworkException("Scene asset name is invalid.");
-            }
-
-            if (m_assetManager == null)
-            {
-                throw new GameFrameworkException("You must set resource manager first.");
-            }
+            CheckSceneAssetName(sceneAssetName);
+            CheckAssetManager();
 
             if (SceneIsUnloading(sceneAssetName))
             {
@@ -471,25 +473,22 @@ namespace GameFrameX.Scene.Runtime
 
         private void LoadSceneSuccessCallback(string sceneAssetName, float duration, object userData)
         {
-            m_LoadingSceneAssetNames.Remove(sceneAssetName);
-            // m_LoadedSceneAssetNames.Add(sceneAssetName);
             if (m_LoadSceneSuccessEventHandler != null)
             {
                 LoadSceneSuccessEventArgs loadSceneSuccessEventArgs = LoadSceneSuccessEventArgs.Create(sceneAssetName, duration, userData);
                 m_LoadSceneSuccessEventHandler(this, loadSceneSuccessEventArgs);
-                // ReferencePool.Release(loadSceneSuccessEventArgs);
+                ReferencePool.Release(loadSceneSuccessEventArgs);
             }
         }
 
         private void LoadSceneFailureCallback(string sceneAssetName, YooAsset.EOperationStatus status, string errorMessage, object userData)
         {
-            m_LoadingSceneAssetNames.Remove(sceneAssetName);
             string appendErrorMessage = Utility.Text.Format("Load scene failure, scene asset name '{0}', status '{1}', error message '{2}'.", sceneAssetName, status, errorMessage);
             if (m_LoadSceneFailureEventHandler != null)
             {
                 LoadSceneFailureEventArgs loadSceneFailureEventArgs = LoadSceneFailureEventArgs.Create(sceneAssetName, status, appendErrorMessage, userData);
                 m_LoadSceneFailureEventHandler(this, loadSceneFailureEventArgs);
-                // ReferencePool.Release(loadSceneFailureEventArgs);
+                ReferencePool.Release(loadSceneFailureEventArgs);
                 return;
             }
 
@@ -502,7 +501,7 @@ namespace GameFrameX.Scene.Runtime
             {
                 LoadSceneUpdateEventArgs loadSceneUpdateEventArgs = LoadSceneUpdateEventArgs.Create(sceneAssetName, progress, userData);
                 m_LoadSceneUpdateEventHandler(this, loadSceneUpdateEventArgs);
-                // ReferencePool.Release(loadSceneUpdateEventArgs);
+                ReferencePool.Release(loadSceneUpdateEventArgs);
             }
         }
 
@@ -514,7 +513,7 @@ namespace GameFrameX.Scene.Runtime
             {
                 UnloadSceneSuccessEventArgs unloadSceneSuccessEventArgs = UnloadSceneSuccessEventArgs.Create(sceneAssetName, userData);
                 m_UnloadSceneSuccessEventHandler(this, unloadSceneSuccessEventArgs);
-                // ReferencePool.Release(unloadSceneSuccessEventArgs);
+                ReferencePool.Release(unloadSceneSuccessEventArgs);
             }
         }
 
@@ -525,7 +524,7 @@ namespace GameFrameX.Scene.Runtime
             {
                 UnloadSceneFailureEventArgs unloadSceneFailureEventArgs = UnloadSceneFailureEventArgs.Create(sceneAssetName, userData);
                 m_UnloadSceneFailureEventHandler(this, unloadSceneFailureEventArgs);
-                // ReferencePool.Release(unloadSceneFailureEventArgs);
+                ReferencePool.Release(unloadSceneFailureEventArgs);
                 return;
             }
 
