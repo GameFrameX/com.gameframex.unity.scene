@@ -1,3 +1,11 @@
+## [2.2.2](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.1...2.2.2) (2026-05-30)
+
+
+### Bug Fixes
+
+* **scene:** 修复 GameSceneManager 引用池泄漏和状态管理问题 ([c9a3f20](https://github.com/gameframex/com.gameframex.unity.scene/commit/c9a3f200126c654b6deb085e4349905c9c38bf8e))
+* **scene:** 统一 SceneComponent 错误处理和默认加载模式 ([29c5244](https://github.com/gameframex/com.gameframex.unity.scene/commit/29c5244832ef735774d3ed62094a47eed04d9eae))
+
 ## [2.2.1](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.0...2.2.1) (2026-05-28)
 
 
