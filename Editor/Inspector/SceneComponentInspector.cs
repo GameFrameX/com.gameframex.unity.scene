@@ -88,18 +88,7 @@ namespace GameFrameX.Scene.Editor
                 return "<Empty>";
             }
 
-            string sceneNameString = string.Empty;
-            foreach (string sceneAssetName in sceneAssetNames)
-            {
-                if (!string.IsNullOrEmpty(sceneNameString))
-                {
-                    sceneNameString += ", ";
-                }
-
-                sceneNameString += SceneComponent.GetSceneName(sceneAssetName);
-            }
-
-            return sceneNameString;
+            return string.Join(", ", System.Array.ConvertAll(sceneAssetNames, SceneComponent.GetSceneName));
         }
     }
 }
