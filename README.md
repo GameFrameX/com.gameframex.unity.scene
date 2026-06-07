@@ -21,7 +21,7 @@ All-in-One Solution for Indie Game Development · Empowering Indie Developers' D
 
 </div>
 
-## Overview
+## Project Overview
 
 GameFrameX Scene is a Unity scene management package built on [YooAsset](https://github.com/tuyoogame/YooAsset). It provides async scene loading/unloading with event-driven state notifications, progress tracking, and an active-scene ordering system.
 
@@ -96,7 +96,7 @@ Download the repository and place it in your Unity project's `Packages` director
 
 ---
 
-## Usage
+## Usage Examples
 
 ### Setup
 
@@ -167,6 +167,21 @@ bool isUnloading = SceneComponent.SceneIsUnloading("Assets/Scenes/GameScene.unit
 
 See [CHANGELOG.md](CHANGELOG.md) for release history.
 
+
+## Dependencies
+
+| Package | Description |
+|---------|-------------|
+| `com.gameframex.unity.asset` | 2.5.0 |
+| `com.gameframex.unity.event` | 1.1.0 |
+
+## Documentation & Resources
+
+- [Documentation](https://gameframex.doc.alianblank.com)
+
+## Community & Support
+
+- QQ Group: 467608841 / 233840761
 ## License
 
 See [LICENSE.md](LICENSE.md) for license information.

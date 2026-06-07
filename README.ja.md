@@ -167,6 +167,21 @@ bool isUnloading = SceneComponent.SceneIsUnloading("Assets/Scenes/GameScene.unit
 
 詳細は [CHANGELOG.md](CHANGELOG.md) をご覧ください。
 
+
+## 依存関係
+
+| パッケージ | 説明 |
+|----------|------|
+| `com.gameframex.unity.asset` | 2.5.0 |
+| `com.gameframex.unity.event` | 1.1.0 |
+
+## ドキュメントとリソース
+
+- [ドキュメント](https://gameframex.doc.alianblank.com)
+
+## コミュニティとサポート
+
+- QQグループ: 467608841 / 233840761
 ## ライセンス
 
 詳しくは [LICENSE.md](LICENSE.md) をご参照ください。

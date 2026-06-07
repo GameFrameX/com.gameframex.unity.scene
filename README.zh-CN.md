@@ -167,6 +167,21 @@ bool isUnloading = SceneComponent.SceneIsUnloading("Assets/Scenes/GameScene.unit
 
 详见 [CHANGELOG.md](CHANGELOG.md)。
 
+
+## 依赖
+
+| 包 | 说明 |
+|----|------|
+| `com.gameframex.unity.asset` | 2.5.0 |
+| `com.gameframex.unity.event` | 1.1.0 |
+
+## 文档与资源
+
+- [官方文档](https://gameframex.doc.alianblank.com)
+
+## 社区与支持
+
+- QQ群: 467608841 / 233840761
 ## 开源协议
 
 详见 [LICENSE.md](LICENSE.md) 文件。
