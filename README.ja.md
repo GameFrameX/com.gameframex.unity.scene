@@ -8,16 +8,17 @@
 [![Version](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.scene)](https://github.com/GameFrameX/com.gameframex.unity.scene/releases)
 [![Documentation](https://img.shields.io/badge/Documentation-docs-blue)](https://gameframex.doc.alianblank.com)
 
-> インディゲーム開発者向けオールインワンソリューション · インディ開発者の夢を支援
+インディゲーム開発者向けオールインワンソリューション · インディ開発者の夢を支援
+
+<br />
 
 [ドキュメント](https://gameframex.doc.alianblank.com) · [クイックスタート](#クイックスタート) · [QQグループ](https://qm.qq.com/q/5U9Fvebw)
+
+<br />
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | **日本語** | [한국어](README.ko.md)
 
 </div>
-
----
-
 ## プロジェクト概要
 
 GameFrameX Scene は [YooAsset](https://github.com/tuyoogame/YooAsset) をベースにした Unity シーン管理パッケージです。非同期シーンのロード/アンロード、イベント駆動の状態通知、進捗追跡、アクティブシーンの順序管理システムを提供します。

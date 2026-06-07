@@ -8,16 +8,17 @@
 [![Version](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.scene)](https://github.com/GameFrameX/com.gameframex.unity.scene/releases)
 [![Documentation](https://img.shields.io/badge/Documentation-docs-blue)](https://gameframex.doc.alianblank.com)
 
-> 인디 게임 개발자를 위한 올인원 솔루션 · 인디 개발자의 꿈을 실현
+인디 게임 개발자를 위한 올인원 솔루션 · 인디 개발자의 꿈을 실현
+
+<br />
 
 [문서](https://gameframex.doc.alianblank.com) · [빠른 시작](#빠른-시작) · [QQ 그룹](https://qm.qq.com/q/5U9Fvebw)
+
+<br />
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | **한국어**
 
 </div>
-
----
-
 ## 프로젝트 개요
 
 GameFrameX Scene은 [YooAsset](https://github.com/tuyoogame/YooAsset) 기반의 Unity 씬 관리 패키지입니다. 비동기 씬 로드/언로드, 이벤트 기반 상태 알림, 진행률 추적 및 활성 씬 순서 관리 시스템을 제공합니다.

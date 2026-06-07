@@ -8,16 +8,17 @@
 [![Version](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.scene)](https://github.com/GameFrameX/com.gameframex.unity.scene/releases)
 [![Documentation](https://img.shields.io/badge/Documentation-docs-blue)](https://gameframex.doc.alianblank.com)
 
-> 独立游戏前后端一体化解决方案 · 独立游戏开发者的圆梦大使
+独立游戏前后端一体化解决方案 · 独立游戏开发者的圆梦大使
+
+<br />
 
 [文档](https://gameframex.doc.alianblank.com) · [快速开始](#快速开始) · [QQ群](https://qm.qq.com/q/5U9Fvebw)
+
+<br />
 
 [English](README.md) | **简体中文** | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 </div>
-
----
-
 ## 项目简介
 
 GameFrameX Scene 是基于 [YooAsset](https://github.com/tuyoogame/YooAsset) 的 Unity 场景管理包。提供异步场景加载/卸载、事件驱动的状态通知、进度追踪和活跃场景排序系统。
