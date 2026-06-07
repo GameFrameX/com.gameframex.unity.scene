@@ -169,4 +169,4 @@ bool isUnloading = SceneComponent.SceneIsUnloading("Assets/Scenes/GameScene.unit
 
 ## 开源协议
 
-本项目基于 MIT 协议开源，详见 [LICENSE.md](LICENSE.md) 文件。
+详见 [LICENSE.md](LICENSE.md) 文件。

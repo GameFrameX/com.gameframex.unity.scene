@@ -169,4 +169,4 @@ See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## License
 
-This project is licensed under the MIT License — see the [LICENSE.md](LICENSE.md) file for details.
+See [LICENSE.md](LICENSE.md) for license information.
