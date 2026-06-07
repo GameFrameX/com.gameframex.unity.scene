@@ -1,3 +1,10 @@
+## [2.2.3](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.2...2.2.3) (2026-06-07)
+
+
+### Bug Fixes
+
+* 补全包规范文件（LICENSE/CHANGELOG/URL 字段/unity 字段） ([f18444d](https://github.com/gameframex/com.gameframex.unity.scene/commit/f18444d68922bcb6d69063819f36a78c26789363))
+
 ## [2.2.2](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.1...2.2.2) (2026-05-30)
 
 
