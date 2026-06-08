@@ -454,7 +454,7 @@ namespace GameFrameX.Scene.Runtime
                 m_SceneOrder.Add(eventArgs.SceneAssetName, 0);
             }
 
-            m_EventComponent.Fire(this, eventArgs);
+            m_EventComponent.Fire(this, LoadSceneSuccessEventArgs.Create(eventArgs.SceneAssetName, eventArgs.Duration, eventArgs.UserData));
             RefreshSceneOrder();
         }
 
@@ -462,17 +462,17 @@ namespace GameFrameX.Scene.Runtime
         {
             Log.Warning("Load scene failure, scene asset name '{0}', error message '{1}'.", eventArgs.SceneAssetName,
                         eventArgs.ErrorMessage);
-            m_EventComponent.Fire(this, eventArgs);
+            m_EventComponent.Fire(this, LoadSceneFailureEventArgs.Create(eventArgs.SceneAssetName, eventArgs.Status, eventArgs.ErrorMessage, eventArgs.UserData));
         }
 
         private void OnLoadGameSceneUpdate(object sender, LoadSceneUpdateEventArgs eventArgs)
         {
-            m_EventComponent.Fire(this, eventArgs);
+            m_EventComponent.Fire(this, LoadSceneUpdateEventArgs.Create(eventArgs.SceneAssetName, eventArgs.Progress, eventArgs.UserData));
         }
 
         private void OnUnloadGameSceneSuccess(object sender, UnloadSceneSuccessEventArgs eventArgs)
         {
-            m_EventComponent.Fire(this, eventArgs);
+            m_EventComponent.Fire(this, UnloadSceneSuccessEventArgs.Create(eventArgs.SceneAssetName, eventArgs.UserData));
             m_SceneOrder.Remove(eventArgs.SceneAssetName);
             RefreshSceneOrder();
         }
@@ -480,7 +480,7 @@ namespace GameFrameX.Scene.Runtime
         private void OnUnloadGameSceneFailure(object sender, UnloadSceneFailureEventArgs eventArgs)
         {
             Log.Warning("Unload scene failure, scene asset name '{0}'.", eventArgs.SceneAssetName);
-            m_EventComponent.Fire(this, eventArgs);
+            m_EventComponent.Fire(this, UnloadSceneFailureEventArgs.Create(eventArgs.SceneAssetName, eventArgs.UserData));
         }
     }
 }
