@@ -1,3 +1,10 @@
+## [2.2.4](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.3...2.2.4) (2026-06-08)
+
+
+### Bug Fixes
+
+* **scene:** 修复事件触发时直接传递内部事件参数的问题 ([08c2828](https://github.com/gameframex/com.gameframex.unity.scene/commit/08c2828dc5bdb1c28ff232e6b8c2a9b930ab05a9))
+
 ## [2.2.3](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.2...2.2.3) (2026-06-07)
 
 
