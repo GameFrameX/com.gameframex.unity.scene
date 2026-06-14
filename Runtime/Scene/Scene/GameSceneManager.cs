@@ -383,16 +383,89 @@ namespace GameFrameX.Scene.Runtime
                 throw new GameFrameworkException(Utility.Text.Format("Scene asset '{0}' is being loaded.", sceneAssetName));
             }
 
-            if (SceneIsLoaded(sceneAssetName))
+            if (sceneMode == UnityEngine.SceneManagement.LoadSceneMode.Single)
+            {
+                // Single 模式下提前在 m_LoadingSceneAssetNames 占位，防止下方 UnloadAllLoadedScenesInternal
+                // 同步触发的 unload 事件订阅者重入 LoadScene(同名场景) 时跳过 SceneIsLoading 检查；
+                // await 后用索引器更新为真实 SceneHandle。占位期间 SceneHandle 为 null 是临时的，
+                // 因为 OnLoadSceneCompleted/OnLoadSceneUpdate 都从 sceneHandle 参数取 AssetPath，不依赖字典内的 handle。
+                m_LoadingSceneAssetNames[sceneAssetName] = new SceneHandleData(null, userData);
+
+                // Unity 在 Single 模式下会自动销毁其他场景的 GameObject，但 YooAsset 的资源引用需框架主动释放；
+                // 字典中残留的旧场景条目也会导致后续重新加载（含重启同场景）时报 "already loaded" 异常，故统一清理。
+                UnloadAllLoadedScenesInternal();
+            }
+            else if (SceneIsLoaded(sceneAssetName))
             {
                 throw new GameFrameworkException(Utility.Text.Format("Scene asset '{0}' is already loaded.", sceneAssetName));
             }
+            else
+            {
+                // Additive 模式不触发同步 unload 事件，无需提前占位；保持原 Add 行为便于检测重复键。
+                m_LoadingSceneAssetNames.Add(sceneAssetName, new SceneHandleData(null, userData));
+            }
 
-            var sceneOperationHandle = await m_assetManager.LoadSceneAsync(sceneAssetName, sceneMode, true);
-            m_LoadingSceneAssetNames.Add(sceneAssetName, new SceneHandleData(sceneOperationHandle, userData));
+            YooAsset.SceneHandle sceneOperationHandle;
+            try
+            {
+                sceneOperationHandle = await m_assetManager.LoadSceneAsync(sceneAssetName, sceneMode, true);
+            }
+            catch
+            {
+                // await 抛异常时清理占位，避免下次 LoadScene 同名场景被 SceneIsLoading 误判为正在加载。
+                m_LoadingSceneAssetNames.Remove(sceneAssetName);
+                throw;
+            }
+
+            m_LoadingSceneAssetNames[sceneAssetName] = new SceneHandleData(sceneOperationHandle, userData);
             // sceneOperationHandle.Update += OnLoadSceneUpdate;
             sceneOperationHandle.Completed += OnLoadSceneCompleted;
             return sceneOperationHandle;
+        }
+
+        private void UnloadAllLoadedScenesInternal()
+        {
+            if (m_LoadedSceneAssetNames.Count == 0)
+            {
+                return;
+            }
+
+            var entries = m_LoadedSceneAssetNames.ToArray();
+            m_LoadedSceneAssetNames.Clear();
+
+            foreach (var entry in entries)
+            {
+                var handle = entry.Value;
+                var sceneAssetName = entry.Key;
+
+                if (handle != null && !handle.IsMainScene())
+                {
+                    // Additive 场景：走标准 UnloadAsync 流程，事件由 Completed 回调触发。
+                    var unloadOp = handle.UnloadAsync();
+                    m_UnloadingSceneAssetNames.Add(sceneAssetName, handle);
+
+                    void OnUnloadCompleted(YooAsset.AsyncOperationBase asyncOperationBase)
+                    {
+                        if (asyncOperationBase.Error.IsNullOrEmpty())
+                        {
+                            UnloadSceneSuccessCallback(sceneAssetName, null);
+                        }
+                        else
+                        {
+                            UnloadSceneFailureCallback(sceneAssetName, null);
+                        }
+                    }
+
+                    unloadOp.Completed += OnUnloadCompleted;
+                }
+                else
+                {
+                    // Single 模式场景被 YooAsset 标记为 main scene，主动 UnloadAsync 会被拒绝；
+                    // Unity 加载新 Single 场景时会自动销毁旧场景的 GameObject，资源释放交给 YooAsset 内部处理。
+                    // 但仍需主动触发 UnloadSceneSuccess 事件，让 SceneComponent 等订阅方同步状态（如清理 m_SceneOrder）。
+                    UnloadSceneSuccessCallback(sceneAssetName, null);
+                }
+            }
         }
 
         private void OnLoadSceneUpdate(YooAsset.SceneHandle sceneHandle)
