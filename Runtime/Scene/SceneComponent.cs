@@ -57,6 +57,7 @@ namespace GameFrameX.Scene.Runtime
 
         private Camera m_MainCamera = null;
         private UnityEngine.SceneManagement.Scene m_GameFrameworkScene = default(UnityEngine.SceneManagement.Scene);
+        private Coroutine m_RefreshSceneOrderCo = null;
 
         [SerializeField] private bool m_EnableLoadSceneUpdateEvent = true;
 
@@ -421,9 +422,16 @@ namespace GameFrameX.Scene.Runtime
                 }
 
                 var scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(GetSceneName(maxSceneName));
-                if (!scene.IsValid())
+                if (!scene.IsValid() || !scene.isLoaded)
                 {
-                    Log.Error("Active scene '{0}' is invalid.", maxSceneName);
+                    // YooAsset 的 await 完成时机可能早于 Unity 场景 isLoaded=true，此时 SetActiveScene 会抛 ArgumentException。
+                    // 推迟到下一帧场景实际加载完成后再激活。多次连续切换时，旧协程必须先停掉，否则会与新协程争抢 SetActiveScene。
+                    if (m_RefreshSceneOrderCo != null)
+                    {
+                        StopCoroutine(m_RefreshSceneOrderCo);
+                        m_RefreshSceneOrderCo = null;
+                    }
+                    m_RefreshSceneOrderCo = StartCoroutine(RefreshSceneOrderWhenLoadedCo(maxSceneName));
                     return;
                 }
 
@@ -437,14 +445,67 @@ namespace GameFrameX.Scene.Runtime
 
         private void SetActiveScene(UnityEngine.SceneManagement.Scene activeScene)
         {
+            if (!activeScene.IsValid())
+            {
+                // activeScene 可能因 Single 模式多次切换而过期——Awake 时缓存的 m_GameFrameworkScene
+                // 在第一次 Single 加载后即被 Unity 卸载，handle 失效；新场景在异步加载窗口期也可能尚未 valid。
+                // 此时 Unity 自己会管理 active scene（Single 新场景加载完成后自动激活），框架跳过本次设置即可，
+                // 不需要抛 ArgumentException 也不需要警告污染日志。
+                RefreshMainCamera();
+                return;
+            }
+
             var lastActiveScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             if (lastActiveScene != activeScene)
             {
-                UnityEngine.SceneManagement.SceneManager.SetActiveScene(activeScene);
+                try
+                {
+                    UnityEngine.SceneManagement.SceneManager.SetActiveScene(activeScene);
+                }
+                catch (ArgumentException ex)
+                {
+                    // YooAsset 的 await 完成时机可能早于 Unity 场景完全激活，导致 SetActiveScene 抛 ArgumentException。
+                    // 此时 active scene 已是目标场景或很快会被 Unity 自动切换，吞掉异常避免污染调用方；只吞 SetActiveScene 自己的异常，订阅者回调里抛的异常仍会正常冒泡。
+                    Log.Warning("SetActiveScene failed (will be retried by Unity internally): {0}", ex.Message);
+                    return;
+                }
+
                 m_EventComponent.Fire(this, ActiveSceneChangedEventArgs.Create(lastActiveScene, activeScene));
             }
 
             RefreshMainCamera();
+        }
+
+        private System.Collections.IEnumerator RefreshSceneOrderWhenLoadedCo(string sceneAssetName)
+        {
+            try
+            {
+                var sceneName = GetSceneName(sceneAssetName);
+                var scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
+
+                int retry = 0;
+                while ((!scene.IsValid() || !scene.isLoaded) && retry < 60)
+                {
+                    yield return null;
+                    scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
+                    retry++;
+                }
+
+                if (scene.IsValid() && scene.isLoaded)
+                {
+                    SetActiveScene(scene);
+                }
+                else
+                {
+                    Log.Warning("Scene '{0}' did not become loaded within timeout, fallback to framework scene.", sceneAssetName);
+                    SetActiveScene(m_GameFrameworkScene);
+                }
+            }
+            finally
+            {
+                // 协程结束（正常完成或被 StopCoroutine 终止）时清理句柄，避免下次 RefreshSceneOrder 误判旧协程还在。
+                m_RefreshSceneOrderCo = null;
+            }
         }
 
         private void OnLoadGameSceneSuccess(object sender, LoadSceneSuccessEventArgs eventArgs)
