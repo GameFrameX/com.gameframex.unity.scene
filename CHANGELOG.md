@@ -1,3 +1,11 @@
+## [2.2.5](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.4...2.2.5) (2026-06-14)
+
+
+### Bug Fixes
+
+* **scene:** 修复 Single 模式重新加载场景时的资源泄漏与重复加载异常 ([7a75d2b](https://github.com/gameframex/com.gameframex.unity.scene/commit/7a75d2baf0107dbf7afdf45c657e733ef2bcce4d))
+* **scene:** 修复场景激活时序导致 SetActiveScene 抛 ArgumentException ([d97b902](https://github.com/gameframex/com.gameframex.unity.scene/commit/d97b902feaf87694f5805c41ca29e415d949599d))
+
 ## [2.2.4](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.3...2.2.4) (2026-06-08)
 
 
