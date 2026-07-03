@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.5...2.3.0) (2026-07-03)
+
+
+### Features
+
+* **scene:** 添加 SceneComponent 自动注册特性 ([3edbf2b](https://github.com/gameframex/com.gameframex.unity.scene/commit/3edbf2b88c5cd8a7335fe7affd1d03aa1a8eea26))
+
 ## [2.2.5](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.4...2.2.5) (2026-06-14)
 
 
