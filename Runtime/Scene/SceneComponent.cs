@@ -45,6 +45,7 @@ namespace GameFrameX.Scene.Runtime
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("GameFrameX/Scene")]
+    [GameFrameXAutoComponent(-4000)]
     public sealed class SceneComponent : GameFrameworkComponent
     {
         private const int DefaultPriority = 0;
