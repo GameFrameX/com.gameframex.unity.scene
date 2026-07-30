@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.3.0...2.3.1) (2026-07-30)
+
+
+### Bug Fixes
+
+* **dependencies:** 更新依赖项版本以修复兼容性问题 ([93af967](https://github.com/gameframex/com.gameframex.unity.scene/commit/93af9674735de83b2501d6348b5b93d1ec2723ab))
+
 # [2.3.0](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.2.5...2.3.0) (2026-07-03)
 
 
