@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.3.1...2.3.2) (2026-08-28)
+
+
+### Bug Fixes
+
+* **scene:** 修复加载失败场景仍被标记已加载的字典缺陷 ([#2](https://github.com/gameframex/com.gameframex.unity.scene/issues/2)) ([b77ebc1](https://github.com/gameframex/com.gameframex.unity.scene/commit/b77ebc14658672686068086ca6abbc673963fcfc))
+
 ## [2.3.1](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.3.0...2.3.1) (2026-07-30)
 
 
