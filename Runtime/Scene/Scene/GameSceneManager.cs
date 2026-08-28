@@ -479,8 +479,11 @@ namespace GameFrameX.Scene.Runtime
         private void OnLoadSceneCompleted(YooAsset.SceneHandle sceneOperationHandle)
         {
             string assetPath = sceneOperationHandle.GetAssetInfo().AssetPath;
+            bool loadSucceed = sceneOperationHandle.IsDone && sceneOperationHandle.Status == YooAsset.EOperationStatus.Succeed;
 
-            if (!m_LoadedSceneAssetNames.ContainsKey(assetPath))
+            // 状态判定前置：加载失败的场景不写入已加载字典，避免幽灵记录导致
+            // UnloadScene 异常分支、同名场景重试被 "already loaded" 拦截及句柄泄漏。
+            if (loadSucceed && !m_LoadedSceneAssetNames.ContainsKey(assetPath))
             {
                 m_LoadedSceneAssetNames.Add(assetPath, sceneOperationHandle);
             }
@@ -492,7 +495,7 @@ namespace GameFrameX.Scene.Runtime
 
             if (value != null)
             {
-                if (sceneOperationHandle.IsDone && sceneOperationHandle.Status == YooAsset.EOperationStatus.Succeed)
+                if (loadSucceed)
                 {
                     LoadSceneSuccessCallback(assetPath, sceneOperationHandle.Duration, value.UserData);
                 }
