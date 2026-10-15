@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/gameframex/com.gameframex.unity.scene/compare/3.0.0...3.0.1) (2026-10-15)
+
+
+### Bug Fixes
+
+* **dependencies:** 对齐依赖至实际发布版本 ([2e757fd](https://github.com/gameframex/com.gameframex.unity.scene/commit/2e757fdc6ed6724e8985969d26217abdad88986a))
+
 # [3.0.0](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.3.2...3.0.0) (2026-10-15)
 
 
