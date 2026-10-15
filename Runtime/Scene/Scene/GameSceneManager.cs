@@ -1,4 +1,4 @@
-﻿// ==========================================================================================
+// ==========================================================================================
 //  GameFrameX 组织及其衍生项目的版权、商标、专利及其他相关权利
 //  GameFrameX organization and its derivative projects' copyrights, trademarks, patents, and related rights
 //  均受中华人民共和国及相关国际法律法规保护。
@@ -42,7 +42,7 @@ namespace GameFrameX.Scene.Runtime
     /// 场景管理器。
     /// </summary>
     [UnityEngine.Scripting.Preserve]
-    public sealed class GameSceneManager : GameFrameworkModule, IGameSceneManager
+    public sealed class GameSceneManager : IGameFrameworkModule, IGameSceneManager, IShutdownableModule, IPrioritizedModule
     {
         private sealed class SceneHandleData
         {
@@ -87,7 +87,7 @@ namespace GameFrameX.Scene.Runtime
         /// 获取游戏框架模块优先级。
         /// </summary>
         /// <remarks>优先级较高的模块会优先轮询，并且关闭操作会后进行。</remarks>
-        protected override int Priority
+        public int Priority
         {
             get { return 2; }
         }
@@ -138,18 +138,9 @@ namespace GameFrameX.Scene.Runtime
         }
 
         /// <summary>
-        /// 场景管理器轮询。
-        /// </summary>
-        /// <param name="elapseSeconds">逻辑流逝时间，以秒为单位。</param>
-        /// <param name="realElapseSeconds">真实流逝时间，以秒为单位。</param>
-        protected override void Update(float elapseSeconds, float realElapseSeconds)
-        {
-        }
-
-        /// <summary>
         /// 关闭并清理场景管理器。
         /// </summary>
-        protected override void Shutdown()
+        public void Shutdown()
         {
             var loadedSceneAssetNames = m_LoadedSceneAssetNames.Keys.ToArray();
             foreach (var loadedSceneAssetName in loadedSceneAssetNames)

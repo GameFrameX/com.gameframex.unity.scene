@@ -1,3 +1,38 @@
+## [Unreleased]
+
+### ⚠ BREAKING CHANGES
+
+* **module:** 新增 `SceneOptions` 启动配置（`GameFrameXOptions.Configure`，首场景加载前注入；字段默认值同原 Inspector 序列化默认）：`EnableLoadSceneUpdateEvent`、`EnableLoadSceneDependencyAssetEvent`（均为实时型，Play 期可经活视图 / 模块 API 调整）
+* **module:** 组件值参数序列化字段移除，编辑期配置入口收敛到代码 Options；组件内事件访问由组件直达改为模块直达
+
+**迁移对照：**
+
+| 旧访问方式 | 新访问方式 | 说明 |
+|---|---|---|
+| `m_EnableLoadSceneUpdateEvent` 序列化字段 | `SceneOptions.EnableLoadSceneUpdateEvent` | 实时型 |
+| `m_EnableLoadSceneDependencyAssetEvent` 序列化字段 | `SceneOptions.EnableLoadSceneDependencyAssetEvent` | 实时型 |
+| `GameEntry.GetComponent<EventComponent>()` | `GameFrameworkEntry.GetModule<IEventManager>()` | 组件直达改模块直达 |
+
+# [3.0.0](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.3.2...3.0.0) (2026-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* **module:** 模块契约全接口化：删除 `GameFrameworkModule` 抽象基类，改为 `IGameFrameworkModule` 标记接口 + 可选能力接口
+
+**新契约形态与迁移对照：**
+
+| 旧基类成员 | 新契约 | 迁移方式 |
+|---|---|---|
+| `: GameFrameworkModule` | `IGameFrameworkModule` | 声明处直接替换（标记接口，可注册进 `GameFrameworkEntry`） |
+| `override void Update(float, float)` | `IUpdatableModule` | 真实实现改 `public`；空实现删除（未实现者不再被轮询） |
+| `override void Shutdown()` | `IShutdownableModule` | 真实实现改 `public`；空实现删除（未实现者不再被关闭） |
+| `override int Priority` | `IPrioritizedModule` | 改 `public int Priority { get; }`；未实现视为 0 |
+
+本包变更：`GameSceneManager` 实现 `IShutdownableModule`、`IPrioritizedModule`（Priority=2），删除空 `Update` 覆写。
+
+`GameFrameworkEntry.Update` 仅分派 `IUpdatableModule`；`Shutdown` 按优先级反序仅分派 `IShutdownableModule`；tick 与关闭顺序与旧实现完全一致。能力方法仅由宿主入口调用，业务侧继续通过 `GetModule<IXxxManager>()` 访问模块。
+
 ## [2.3.2](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.3.1...2.3.2) (2026-08-28)
 
 

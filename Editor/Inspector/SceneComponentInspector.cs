@@ -39,8 +39,6 @@ namespace GameFrameX.Scene.Editor
     [CustomEditor(typeof(SceneComponent))]
     internal sealed class SceneComponentInspector : ComponentTypeComponentInspector
     {
-        private SerializedProperty m_EnableLoadSceneUpdateEvent = null;
-        private SerializedProperty m_EnableLoadSceneDependencyAssetEvent = null;
 
         public override void OnInspectorGUI()
         {
@@ -50,12 +48,8 @@ namespace GameFrameX.Scene.Editor
 
             SceneComponent t = (SceneComponent)target;
 
-            EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
-            {
-                EditorGUILayout.PropertyField(m_EnableLoadSceneUpdateEvent);
-                EditorGUILayout.PropertyField(m_EnableLoadSceneDependencyAssetEvent);
-            }
-            EditorGUI.EndDisabledGroup();
+            // C9 活视图：编辑态提示 SceneOptions 入口；Play 态实时显示/修改两个加载事件开关（写回私有字段）。
+            GameFrameXOptionsLiveViewUtility.DrawLiveView(t, typeof(SceneOptions));
 
             serializedObject.ApplyModifiedProperties();
 
@@ -70,11 +64,6 @@ namespace GameFrameX.Scene.Editor
             }
         }
 
-        protected override void Enable()
-        {
-            m_EnableLoadSceneUpdateEvent = serializedObject.FindProperty("m_EnableLoadSceneUpdateEvent");
-            m_EnableLoadSceneDependencyAssetEvent = serializedObject.FindProperty("m_EnableLoadSceneDependencyAssetEvent");
-        }
 
         protected override void RefreshTypeNames()
         {

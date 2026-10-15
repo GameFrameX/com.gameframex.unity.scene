@@ -31,7 +31,6 @@
 
 using GameFrameX.Event.Runtime;
 using GameFrameX.Runtime;
-using UnityEngine.Scripting;
 
 namespace GameFrameX.Scene.Runtime
 {
@@ -48,7 +47,7 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 初始化加载场景成功事件的新实例。
         /// </summary>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public LoadSceneSuccessEventArgs()
         {
             SceneAssetName = null;
@@ -67,19 +66,19 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 获取场景资源名称。
         /// </summary>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public string SceneAssetName { get; private set; }
 
         /// <summary>
         /// 获取加载持续时间。
         /// </summary>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public float Duration { get; private set; }
 
         /// <summary>
         /// 获取用户自定义数据。
         /// </summary>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public object UserData { get; private set; }
 
         /// <summary>
@@ -89,7 +88,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="duration">加载持续时间。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的加载场景成功事件。</returns>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public static LoadSceneSuccessEventArgs Create(string sceneAssetName, float duration, object userData)
         {
             LoadSceneSuccessEventArgs loadSceneSuccessEventArgs = ReferencePool.Acquire<LoadSceneSuccessEventArgs>();

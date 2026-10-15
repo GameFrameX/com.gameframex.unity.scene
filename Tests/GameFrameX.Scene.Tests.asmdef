@@ -1,7 +1,8 @@
 {
     "name": "GameFrameX.Scene.Tests",
     "references": [
-        "GameFrameX.Scene.Runtime"
+        "GameFrameX.Scene.Runtime",
+        "GameFrameX.Runtime"
     ],
     "rootNamespace": "GameFrameX.Scene.Tests",
     "includePlatforms": [

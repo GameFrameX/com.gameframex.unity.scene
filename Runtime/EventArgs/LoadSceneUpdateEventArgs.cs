@@ -31,7 +31,6 @@
 
 using GameFrameX.Event.Runtime;
 using GameFrameX.Runtime;
-using UnityEngine.Scripting;
 
 namespace GameFrameX.Scene.Runtime
 {
@@ -48,7 +47,7 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 初始化加载场景更新事件的新实例。
         /// </summary>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public LoadSceneUpdateEventArgs()
         {
             SceneAssetName = null;
@@ -67,19 +66,19 @@ namespace GameFrameX.Scene.Runtime
         /// <summary>
         /// 获取场景资源名称。
         /// </summary>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public string SceneAssetName { get; private set; }
 
         /// <summary>
         /// 获取加载场景进度。
         /// </summary>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public float Progress { get; private set; }
 
         /// <summary>
         /// 获取用户自定义数据。
         /// </summary>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public object UserData { get; private set; }
 
         /// <summary>
@@ -89,7 +88,7 @@ namespace GameFrameX.Scene.Runtime
         /// <param name="progress">加载场景进度。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的加载场景更新事件。</returns>
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public static LoadSceneUpdateEventArgs Create(string sceneAssetName, float progress, object userData)
         {
             LoadSceneUpdateEventArgs loadSceneUpdateEventArgs = ReferencePool.Acquire<LoadSceneUpdateEventArgs>();
