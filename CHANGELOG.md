@@ -1,3 +1,19 @@
+# [3.0.0](https://github.com/gameframex/com.gameframex.unity.scene/compare/2.3.2...3.0.0) (2026-10-15)
+
+
+* feat(module)!: 场景模块薄入口化并新增 SceneOptions ([75b798b](https://github.com/gameframex/com.gameframex.unity.scene/commit/75b798bee2537bb0021c9515a7d8248d76ba2582))
+
+
+### Bug Fixes
+
+* **deps:** 同步依赖版本至最新 ([75aab46](https://github.com/gameframex/com.gameframex.unity.scene/commit/75aab464c7c49856244b4e28908790e0a9f319fe))
+* **package:** 修正品牌命名 ([e403b47](https://github.com/gameframex/com.gameframex.unity.scene/commit/e403b471b40c581428956cf42f01b856f6e028f6))
+
+
+### BREAKING CHANGES
+
+* SceneComponent 序列化字段移除，编辑期配置入口收敛到代码 SceneOptions。
+
 ## [Unreleased]
 
 ### ⚠ BREAKING CHANGES
