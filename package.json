@@ -1,40 +1,40 @@
 {
-  "name": "com.gameframex.unity.scene",
-  "displayName": "Game Frame X Scene",
-  "category": "GameFrameX",
-  "description": "GameFrameX Scene — Unity scene management package built on YooAsset. Handles async scene loading/unloading with configurable LoadSceneMode, progress tracking, active-scene ordering system, automatic camera refresh, and event notifications for scene state changes. Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Scene — 基于 YooAsset 的 Unity 场景管理功能包。处理异步场景加载/卸载，支持可配置 LoadSceneMode、进度追踪、活跃场景排序系统、自动相机刷新，以及场景状态变更的事件通知。文档：https://gameframex.doc.alianblank.com",
-  "version": "2.3.2",
-  "unity": "2019.4",
-  "keywords": [
-    "GameFrameX",
-    "Scene"
-  ],
-  "repository": {
     "name": "com.gameframex.unity.scene",
-    "url": "git+https://github.com/gameframex/com.gameframex.unity.scene.git",
-    "type": "git"
-  },
-  "author": {
-    "name": "Blank",
-    "email": "alianblank@outlook.com",
-    "url": "https://gameframex.doc.alianblank.com"
-  },
-  "dependencies": {
-    "com.gameframex.unity.asset": "3.1.1",
-    "com.gameframex.unity.event": "1.3.0",
-    "com.gameframex.unity": "2.5.1",
-    "com.gameframex.unity.tuyoogame.yooasset": "2.9.4"
-  },
-  "devDependencies": {
-    "semantic-release": "^24.2.0",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.cnb.cool/GameFrameX/npm/-/packages/"
-  },
-  "documentationUrl": "https://gameframex.doc.alianblank.com",
-  "changelogUrl": "https://github.com/gameframex/com.gameframex.unity.scene/blob/main/CHANGELOG.md",
-  "licensesUrl": "https://github.com/gameframex/com.gameframex.unity.scene/blob/main/LICENSE.md"
+    "displayName": "Game Frame X Scene",
+    "category": "GameFrameX",
+    "description": "GameFrameX Scene — Unity scene management package built on YooAsset. Handles async scene loading/unloading with configurable LoadSceneMode, progress tracking, active-scene ordering system, automatic camera refresh, and event notifications for scene state changes. Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Scene — 基于 YooAsset 的 Unity 场景管理功能包。处理异步场景加载/卸载，支持可配置 LoadSceneMode、进度追踪、活跃场景排序系统、自动相机刷新，以及场景状态变更的事件通知。文档：https://gameframex.doc.alianblank.com",
+    "version": "3.0.0",
+    "unity": "2019.4",
+    "keywords": [
+        "GameFrameX",
+        "Scene"
+    ],
+    "repository": {
+        "name": "com.gameframex.unity.scene",
+        "url": "git+https://github.com/gameframex/com.gameframex.unity.scene.git",
+        "type": "git"
+    },
+    "author": {
+        "name": "Blank",
+        "email": "alianblank@outlook.com",
+        "url": "https://gameframex.doc.alianblank.com"
+    },
+    "dependencies": {
+        "com.gameframex.unity.asset": "4.0.0",
+        "com.gameframex.unity.event": "2.0.0",
+        "com.gameframex.unity": "3.0.0",
+        "com.gameframex.unity.tuyoogame.yooasset": "2.9.4"
+    },
+    "devDependencies": {
+        "semantic-release": "^24.2.0",
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/git": "^10.0.1"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://npm.cnb.cool/GameFrameX/npm/-/packages/"
+    },
+    "documentationUrl": "https://gameframex.doc.alianblank.com",
+    "changelogUrl": "https://github.com/gameframex/com.gameframex.unity.scene/blob/main/CHANGELOG.md",
+    "licensesUrl": "https://github.com/gameframex/com.gameframex.unity.scene/blob/main/LICENSE.md"
 }
